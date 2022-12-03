@@ -10,8 +10,9 @@ import { extractDbHost } from '@/misc/convert-host';
 export default class Resolver {
 	private history: Set<string>;
 	private user?: ILocalUser;
+	private recursionLimit?: number;
 
-	constructor() {
+	constructor(recursionLimit = 100) {
 		this.history = new Set();
 	}
 
@@ -42,6 +43,10 @@ export default class Resolver {
 
 		if (this.history.has(value)) {
 			throw new Error('cannot resolve already resolved one');
+		}
+
+		if (this.recursionLimit && this.history.size > this.recursionLimit) {
+			throw new Error('hit recursion limit');
 		}
 
 		this.history.add(value);
