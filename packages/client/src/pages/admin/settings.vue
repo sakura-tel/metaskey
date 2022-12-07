@@ -68,6 +68,10 @@
 			</FormSection>
 
 			<FormSection>
+				<FormSwitch v-model="useStarForReactionFallback" class="_formBlock">{{ $ts.useStarForReactionFallback }}</FormSwitch>
+			</FormSection>
+
+			<FormSection>
 				<template #label>{{ $ts.files }}</template>
 
 				<FormSwitch v-model="cacheRemoteFiles" class="_formBlock">
@@ -194,6 +198,7 @@ export default defineComponent({
 			swPrivateKey: null,
 			deeplAuthKey: '',
 			deeplIsPro: false,
+			useStarForReactionFallback: false,
 		}
 	},
 
@@ -223,6 +228,7 @@ export default defineComponent({
 			this.swPrivateKey = meta.swPrivateKey;
 			this.deeplAuthKey = meta.deeplAuthKey;
 			this.deeplIsPro = meta.deeplIsPro;
+			this.useStarForReactionFallback = meta.useStarForReactionFallback;
 		},
 
 		save() {
@@ -250,6 +256,7 @@ export default defineComponent({
 				swPrivateKey: this.swPrivateKey,
 				deeplAuthKey: this.deeplAuthKey,
 				deeplIsPro: this.deeplIsPro,
+				useStarForReactionFallback: this.useStarForReactionFallback,
 			}).then(() => {
 				fetchInstance();
 			});
