@@ -26,6 +26,7 @@
 				<FormSwitch v-model="silenced" class="_formBlock" @update:modelValue="toggleSilence">{{ $ts.silence }}</FormSwitch>
 				<FormSwitch v-model="suspended" class="_formBlock" @update:modelValue="toggleSuspend">{{ $ts.suspend }}</FormSwitch>
 				<FormButton v-if="user.host == null && iAmModerator" class="_formBlock" @click="resetPassword"><i class="fas fa-key"></i> {{ $ts.resetPassword }}</FormButton>
+				<FormButton v-if="iAmModerator" class="_formBlock" @click="deleteAllFiles"><i class="fas fa-trash-alt"></i> {{ $ts.deleteAllFiles }}</FormButton>
 			</FormSection>
 
 			<FormSection>
