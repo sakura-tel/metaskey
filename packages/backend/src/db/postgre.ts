@@ -3,6 +3,7 @@ const types = require('pg').types;
 types.setTypeParser(20, Number);
 
 import { createConnection, Logger, getConnection } from 'typeorm';
+import { redisClient } from './redis';
 import * as highlight from 'cli-highlight';
 import config from '@/config/index';
 
@@ -218,6 +219,7 @@ export function initDb(justBorrow = false, sync = false, forceRecreate = false) 
 
 export async function resetDb() {
 	const reset = async () => {
+		await redisClient.FLUSHDB();
 		const conn = await getConnection();
 		const tables = await conn.query(`SELECT relname AS "table"
 		FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace)
