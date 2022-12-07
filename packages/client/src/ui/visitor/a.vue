@@ -32,7 +32,7 @@
 			</main>
 			<div class="powered-by">
 				<b><MkA to="/">{{ host }}</MkA></b>
-				<small>Powered by <a href="https://github.com/misskey-dev/misskey" target="_blank">Misskey</a></small>
+				<small>Powered by <a href="https://github.com/sakura-tel/metaskey" target="_blank">Misskey</a></small>
 			</div>
 		</div>
 	</div>
@@ -148,7 +148,7 @@ export default defineComponent({
 			* {
 				color: #fff;
 			}
-					
+
 			> h1 {
 				margin: 0;
 				padding: 96px 32px 0 32px;
@@ -170,7 +170,7 @@ export default defineComponent({
 
 			> .action {
 				padding-bottom: 64px;
-				
+
 				> button {
 					display: inline-block;
 					padding: 10px 20px;
@@ -211,9 +211,9 @@ export default defineComponent({
 			}
 
 			> header {
-				
+
 			}
-					
+
 			> h1 {
 				margin: 0;
 				padding: 32px;
