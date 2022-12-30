@@ -27,6 +27,7 @@
 				<FormSwitch v-model="suspended" class="_formBlock" @update:modelValue="toggleSuspend">{{ $ts.suspend }}</FormSwitch>
 				<FormButton v-if="user.host == null && iAmModerator" class="_formBlock" @click="resetPassword"><i class="fas fa-key"></i> {{ $ts.resetPassword }}</FormButton>
 				<FormButton v-if="iAmModerator" class="_formBlock" @click="deleteAllFiles"><i class="fas fa-trash-alt"></i> {{ $ts.deleteAllFiles }}</FormButton>
+				<FormButton v-if="iAmModerator && (!user.isModerator && !user.isAdmin)" class="_formBlock" @click="deleteAccount"><i class="fas fa-trash-alt"></i> {{ $ts.deleteAccount }}</FormButton>
 			</FormSection>
 
 			<FormSection>
@@ -230,6 +231,25 @@ export default defineComponent({
 			if (confirm.canceled) return;
 			const process = async () => {
 				await os.api('admin/delete-all-files-of-a-user', { userId: this.user.id });
+				os.success();
+			};
+			await process().catch(e => {
+				os.alert({
+					type: 'error',
+					text: e.toString()
+				});
+			});
+			await this.refreshUser();
+		},
+
+		async deleteAccount() {
+			const confirm = await os.confirm({
+				type: 'warning',
+				text: this.$ts.deleteAccountConfirm,
+			});
+			if (confirm.canceled) return;
+			const process = async () => {
+				await os.api('admin/delete-account', { userId: this.user.id });
 				os.success();
 			};
 			await process().catch(e => {
